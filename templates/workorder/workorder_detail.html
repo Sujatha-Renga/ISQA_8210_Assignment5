@@ -52,14 +52,14 @@
     </div>
     <div class="card-footer">
         <span class="font-weight-bold float-end">Date Submitted: <br>{{ object.work_order_date }}</span>
-        <a class="btn btn-success" href="{% url 'order_update' object.id %}">Update Work Order</a>
+        <a class="btn btn-warning" href="{% url 'order_update' object.id %}">Update Work Order</a>
     </div>
 </div>
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
-        Work Order Items
-        <a class="btn btn-dark float-end" href="{% url 'item_create' object.pk %}">Add Items</a>
+        <p></p>Work Order Items
+        <a class="btn btn-success" href="{% url 'item_create' object.pk %}">Add Items</a>
     </div>
     <div class="card-body">
         <table id="datatablesSimple" class="table">
@@ -77,7 +77,7 @@
                     <td>{{ item.item_quantity }}</td>
                     <td>{{ item.item_cost }}</td>
                     <td>
-                        <a class="btn btn-success" href="{% url 'item_update' item.pk %}">Update Item</a>
+                        <a class="btn btn-warning" href="{% url 'item_update' item.pk %}">Update Item</a>
                     </td>
                     {% if request.user.is_staff %}
                     <td>

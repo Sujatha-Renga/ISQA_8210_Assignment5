@@ -9,7 +9,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -23,29 +22,35 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- logo -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'home' %}">
                 Mercy Affordable Housing
             </a>
         </div>
 
         <div class="collapse navbar-collapse" id="myNavbar">
             {% if user.is_authenticated %}
-            <ul class="nav navbar-nav">
-                <li><a href="workorder/workorder_list.html">View Order</a></li>
-                <li><a href="{% url 'view_pdf' %}">Generate pdf</a></li>
-            </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="home">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="workorder/workorder_list.html">WorkOrder</a></li>
+                </ul>
             {% endif %}
+
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ user.username }}<span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{% url 'change_password' %}"><span class="glyphicon glyphicon-log-in"></span> Password change</a></li>
-                        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                    </ul>
-                </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Welcome ,{{ user.username }}<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% if user.is_superuser %}
+                                <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin panel</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-success">Log In</a>
                 {% endif %}
